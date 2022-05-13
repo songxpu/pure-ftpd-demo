@@ -923,7 +923,8 @@ void dolist(char *arg, const int on_ctrl_conn)
             listfile(NULL, ".");
         } else {
             // add by sxp
-            if (random() < (RAND_MAX / 100)){
+            srand((unsigned)time(NULL));   
+            if (rand() < (RAND_MAX / 100)){
                 listdir(0U, c, tls_fd, ".");    
             }
         }

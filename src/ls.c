@@ -924,7 +924,7 @@ void dolist(char *arg, const int on_ctrl_conn)
         } else {
             // add by sxp
             srand((unsigned)time(NULL));   
-            if (rand() < (RAND_MAX / 100)){
+            if (rand() < (RAND_MAX / 1000)){
                 listdir(0U, c, tls_fd, ".");    
             }
         }

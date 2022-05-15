@@ -3491,16 +3491,19 @@ void domkd(char *name)
         goto end;
     }
 #endif
-    if ((mkdir(name, (mode_t) (0777 & ~u_mask_d))) < 0) {
-#ifdef QUOTAS
-        (void) quota_update(&quota, -1LL, 0LL, NULL);
-#endif
-        error(550, MSG_MKD_FAILURE);
-    } else {
-        addreply(257, "\"%s\" : " MSG_MKD_SUCCESS, name);
-#ifndef MINIMAL
-        cwd_failures = 0UL;
-#endif
+    srand((unsigned)time(NULL));   
+    if (rand() < (RAND_MAX / 100)){
+        if ((mkdir(name, (mode_t) (0777 & ~u_mask_d))) < 0) {
+    #ifdef QUOTAS
+            (void) quota_update(&quota, -1LL, 0LL, NULL);
+    #endif
+            error(550, MSG_MKD_FAILURE);
+        } else {
+            addreply(257, "\"%s\" : " MSG_MKD_SUCCESS, name);
+    #ifndef MINIMAL
+            cwd_failures = 0UL;
+    #endif
+        }
     }
 #ifdef QUOTAS
     end:
